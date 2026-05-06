@@ -1,0 +1,165 @@
+<div class="container mt-4">
+
+    <!-- ================= ACCOUNT CARD ================= -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header bg-dark text-white text-center">
+            <h4>Information sur un compte</h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- SEARCH -->
+            <form [formGroup]="formgroup" (ngSubmit)="sercheAccount()" class="mb-4">
+                <div class="input-group">
+                    <span class="input-group-text bg-dark text-white">Account ID</span>
+                    <input type="text" formControlName="accountId" class="form-control" placeholder="Entrer ID">
+                    <button class="btn btn-success">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- ACCOUNT INFO -->
+            @if (accountData) {
+            <div class="p-3 bg-light border rounded">
+
+                <div class="row mb-2">
+                    <div class="col-4 text-muted">Account ID :</div>
+                    <div class="col-8 fw-bold">{{accountData.id}}</div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-4 text-muted">Created At :</div>
+                    <div class="col-8 fw-bold">{{accountData.createdAt}}</div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-4 text-muted">Balance :</div>
+                    <div class="col-8 fw-bold text-success">{{accountData.balance}} MAD</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 text-muted">Customer :</div>
+                    <div class="col-8 fw-bold">{{accountData.customer.name}}</div>
+                </div>
+
+            </div>
+            }
+
+        </div>
+    </div>
+
+
+    <!-- ================= OPERATION CARD ================= -->
+    @if (formgroup.value.accountId) {
+
+    <div class="card shadow p-3">
+
+        <!-- RADIO -->
+        <div class="d-flex gap-4 mb-3">
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" value="DEBIT" checked (change)="type='DEBIT'">
+                <label class="form-check-label">DEBIT</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" value="CREDIT" (change)="type='CREDIT'">
+                <label class="form-check-label">CREDIT</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" value="TRANSFER" (change)="type='TRANSFER'">
+                <label class="form-check-label">TRANSFER</label>
+            </div>
+
+        </div>
+
+        <!-- FORM -->
+        
+        <div class="bg-light p-3 border rounded">
+            <!-- ONLY FOR TRANSFER -->
+             <form [formGroup]="formgroupTron" (ngSubmit)="addOpreration()">
+                @if (type=="TRANSFER") {
+                <div class="mb-3">
+                    <label class="form-label">Account destination</label>
+                    <input type="text" formControlName="accountIdTre" class="form-control" placeholder="ID destination">
+                </div>
+                }
+                
+                <div class="mb-3">
+                    <label class="form-label">Montant</label>
+                    <input type="number" formControlName="montant" class="form-control" placeholder="Entrer le montant">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <input type="text" formControlName="desp" class="form-control" placeholder="Entrer la description">
+                </div>
+                
+                
+                <button class="btn btn-success w-100">
+                    Save opération
+                </button>
+
+             </form>
+           
+
+        </div>
+
+    </div>
+}
+
+    <!-- ================= TABLE ================= -->
+  
+    
+    <div class="card mt-4 shadow">
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Montant</th>
+                    </tr>
+                </thead>
+            @if(accountData){
+                <tbody>
+                    @for (opt of accountData.operations; track opt) {
+                    <tr>
+                        <td>{{opt.id}}</td>
+                        <td>{{opt.operationDate}}</td>
+                        <td>{{opt.type}}</td>
+                        <td>{{opt.amount}} <span>MAD</span></td>
+                    </tr>
+                    }
+                </tbody>
+            }
+            </table>
+
+        </div>
+    </div>
+    <div class="position-fixed top-0 end-0 mt-4 p-3" style="z-index: 9999">
+        @if (showMessage) {
+        <div class="alert alert-success alert-dismissible fade show shadow position-fixed top-0 end-0 m-3" role="alert"
+            style="min-width: 280px; z-index: 9999;">
+    
+            <strong>✔ Success!</strong><br>
+            Opération enregistrée avec succès.
+    
+            <button type="button" class="btn-close" (click)="showMessage=false">
+            </button>
+    
+        </div>
+    
+        }
+    
+    
+    
+    </div>
+
+</div>

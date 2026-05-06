@@ -1,0 +1,57 @@
+@if(errorMessage){
+<div class="text-center text-danger  mt-4" >{{errorMessage}}</div>
+}
+
+@else {
+
+
+<div class="container mt-5">
+    <div class=" mt-5">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Liste des Clients</h5>
+            <button class="btn btn-light btn-xl" (click)="goToAddCustemer()"> Ajouter</button>
+            
+        </div>
+        <form [formGroup]="formgroup" (ngSubmit)="serchClients()" class="m-2">
+            <div class="input-group">
+                <label for="search" class="input-group-text bg-dark p-2" style="color: white;">keyword:</label>
+                <input type="text" name="search" id="" formControlName="keyword" class="form-control">  
+                <button class="btn btn-success"><i class="bi bi-search"></i></button>      
+            </div>
+        
+        </form>
+
+        <div class="card-body">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Delete</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (clt of data; track clt) {
+                        <tr>
+                            <td>{{clt.id}}</td>
+                            <td>{{clt.name}}</td>
+                            <td>{{clt.email}}</td>
+                            <td><button class="btn btn-danger" (click)="deleteClient(clt)"><i class="bi bi-trash"></i></button></td>
+                            <td>
+                                <span class="badge bg-success">Actif</span>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+</div>
+}
