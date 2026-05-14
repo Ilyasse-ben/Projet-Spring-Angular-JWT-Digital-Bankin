@@ -8,14 +8,15 @@ import { AdminTompletComenet } from './admin-tomplet-comenet/admin-tomplet-comen
 
 
 export const routes: Routes = [
-    { path: "clients", component:  Client},
+   
     {path:"",redirectTo:"/login",pathMatch:"full"},
+    { path: "login", component: Login },
+
     {
         path: "admin", component: AdminTompletComenet, children: [
             { path: "accounts", component: Account },
             { path: "newClient", component: NewClient },
-            { path: "login", component: Login },
-
+            { path: "clients", component: Client },
         ]
     },
    

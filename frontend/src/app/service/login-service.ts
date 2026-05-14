@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class LoginService {
-  api: string = "http://localhost:8081/auth/login";
+  api: string = "http://localhost:8080/auth/login";
   isAuthenticated: boolean = false;
   roles: any;
   username: any;
@@ -25,7 +25,7 @@ export class LoginService {
   }
   loadProfile(data: any) {
     this.isAuthenticated=true
-    this.accessToken = data['access-token'];
+    this.accessToken = data['access token'];
     let decodedJwt: any = jwtDecode(this.accessToken);
     this.username = decodedJwt.sub;
     this.roles = decodedJwt.scope;

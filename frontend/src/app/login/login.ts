@@ -30,6 +30,7 @@ export class Login implements OnInit{
     this.loginService.login(this.formgroup.value.userName, this.formgroup.value.password).subscribe({
       next:(data)=>{this.loginService.loadProfile(data),
         this.router.navigateByUrl("/admin")
+        console.log(data)
       },
       error:(err)=>{console.log(err)}
     })
