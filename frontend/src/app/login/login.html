@@ -1,0 +1,44 @@
+<div class="container login-container " style="margin-top: 120px;" >
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card p-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Connexion</h2>
+                    <p class="text-muted">Accédez à votre espace sécurisé</p>
+                </div>
+                {{formgroup.value}}
+
+                <form [formGroup]="formgroup" (ngSubmit)="login()">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse Email</label>
+                        <input type="email" class="form-control" formControlName="userName" id="email" placeholder="nom@exemple.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" formControlName="password" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">Se souvenir de moi</label>
+                        </div>
+                        <a href="#" class="text-decoration-none">Mot de passe oublié ?</a>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary fw-bold">Se connecter</button>
+                    </div>
+                </form>
+
+                <hr class="my-4">
+
+                <div class="text-center">
+                    <p class="mb-0">Vous n'avez pas de compte ? <a href="#" class="text-decoration-none">Créer un
+                            compte</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

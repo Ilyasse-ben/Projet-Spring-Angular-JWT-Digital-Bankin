@@ -3,11 +3,21 @@ import { Account } from './account/account';
 import { App } from './app';
 import { Client } from './client/client';
 import { NewClient } from './new-client/new-client';
+import { Login } from './login/login';
+import { AdminTompletComenet } from './admin-tomplet-comenet/admin-tomplet-comenet';
 
 
 export const routes: Routes = [
     { path: "clients", component:  Client},
-    { path: "accounts", component: Account },
-    { path: "newClient", component: NewClient }
+    {path:"",redirectTo:"/login",pathMatch:"full"},
+    {
+        path: "admin", component: AdminTompletComenet, children: [
+            { path: "accounts", component: Account },
+            { path: "newClient", component: NewClient },
+            { path: "login", component: Login },
+
+        ]
+    },
+   
 ];
 
